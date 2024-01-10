@@ -3406,9 +3406,7 @@
         var productImage = "./img/img@2x.png";
         var productName = 'Robosen Optimus Prime';
 
-        const styles = `
-          .mainPopup{position: fixed;z-index: 129;box-sizing: border-box;overflow: visible;transition: transform 1s;font-family: Helvetica, Arial, sans-serif;letter-spacing: normal;line-height: 1.5;width: 360px;cursor: pointer;top: 50px;left: 0px;transform: translate(calc(-100% - 20px))}.mainPopup.activePopup{transform: translate(30px)}
-        `;
+        const styles = `.mainPopup{position: fixed;z-index: 129;box-sizing: border-box;overflow: visible;transition: transform 1s;font-family: Helvetica, Arial, sans-serif;letter-spacing: normal;line-height: 1.5;width: 360px;cursor: pointer;top: 50px;left: 0px;transform: translate(calc(-100% - 20px))}.mainPopup.activePopup{transform: translate(30px)}@media(max-width: 480px){.mainPopup.activePopup{transform: translate(0px);}}@media(max-width: 330px){.mainPopup{width: 95%;}}`;
         const styleSheet = new CSSStyleSheet();
         styleSheet.replaceSync(styles);
         contentPopup.classList.add("mainPopup");
