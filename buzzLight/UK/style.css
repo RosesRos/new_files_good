@@ -88,6 +88,7 @@
 
 .accordion-faq.active > .frame-clE5xA {
     height: auto;
+    /* gap: 15px; */
 }
 .close-arrow.active {
     transform: rotate(180deg);
@@ -247,7 +248,8 @@
     }
 
     .buzz-lightyear .c-faq-mobil {
-        height: 65px;
+        margin-top: -0.5px;
+        margin-bottom: 0;
     }
     .buzz-lightyear .txt-rI47os {
         left: 208px;
