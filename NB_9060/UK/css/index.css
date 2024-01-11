@@ -99,8 +99,8 @@ body {
 	padding: 8px !important;
 	min-height: 64px;
 	z-index: 2;
-	max-width: 560px;
-	width: 100% !important;
+	max-width: 420px;
+	width: 100% ;
 }
 @media screen and (max-width: 584px) {
 	.fixed {

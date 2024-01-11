@@ -859,7 +859,7 @@ a {
   align-items: center;
   flex-direction: row;
   gap: 30px;
-  max-width: 560px;
+  max-width: 420px;
   width: 100%;
   position: fixed;
   bottom: 0;
