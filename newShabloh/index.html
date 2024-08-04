@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" class="overflow-x-hidden">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"> <!-- -- іконка застосунку ---->
+    <link rel="icon" type="image/ico" href="images/1709724911_icon.webp">
+    <link rel="icon" type="image/svg+xml" href="images/1709724911_icon.webp">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/1709724911_icon.webp">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/1709724911_icon.webp">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/1709724911_icon.webp">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/1709724911_icon.webp">
+    <link rel="apple-touch-icon" href="images/1709724911_icon.webp">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/1709724911_icon.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/1709724911_icon.webp">
+    <link rel="apple-touch-icon" sizes="167x167" href="images/1709724911_icon.webp">
+    <link rel="apple-touch-startup-image" href="https://app.spendy.pro/upload/pwa/1709724911_icon.webp">
+    <meta name="apple-mobile-web-app-title" content="GameDev, LLC">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <link crossorigin="use-credentials" rel="manifest" href="./manifest.json?key=WfLDncNfq9&amp;domain=ziansian.click&amp;sub1={sub1}&amp;sub2=2&amp;sub3=1567&amp;sub4=ES_SweetBon&amp;sub5=creo3_2adset2&amp;pixel=462305956380073&amp;user_id=eJz4XcIh8Vo5QYrAKLkUWlqJljmxBzfQjHUb3QHCem">
+    <script async="" src="js/fbevents.js"></script>
+    <script type="module">
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("./sw.js", {scope: '/pwa'})
+                .then(function (reg) {
+                    window.serviceWorkerRegistration = reg
+                    window.dispatchEvent(new Event("serviceWorkerRegistration"));
+                })
+        }
+    </script>
+    <script src="js/firebase-app-compat.js"></script>
+    <script src="js/firebase-messaging-compat.js"></script>
+    <!--<script src="/main.js?v=401"></script>-->
+    <meta name="application-name" content="Plinko Slot (ES)">
+    <meta name="apple-mobile-web-app-title" content="Plinko Slot (ES)">
+    <meta name="description" content="La aplicación de casino en línea Boomerang.bet te invita a probar suerte con la emocionante tragaperras Plinko. Los nuevos jugadores pueden beneficiarse de un generoso bono de bienvenida de 450 € y 250 tiradas gratuitas para empezar a jugar con confianza y más posibilidades de ganar.La tragaperras Plinko ofrece una emocionante jugabilidad inspirada en el popular programa de televisión, donde las bolas caen de un tablero de obstáculos inclinado para crear combinaciones ganadoras únicas. Esta tragaperras combina la sencillez de las reglas con el dinamismo del juego, haciendo de cada giro una experiencia inolvidable. ¡Disfruta de gráficos vibrantes, efectos de sonido auténticos y la oportunidad de ganar grandes premios en Boomerang.bet!">
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '462305956380073');
+        fbq('track', 'PageView');
+    </script> <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=462305956380073&ev=PageView&noscript=1" /></noscript>
+    <script src="js/tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        smallPhone: "375",
+                        mediumPhones: "420",
+                        largePhones: "475",
+                        tab: "510",
+                    },
+                    colors: {
+                        "link": "#0B57CF",
+                        "gray": "#E5E5E5",
+                        "dark-gray": "#5F5F5F"
+                    },
+                    fontFamily: {
+                        'roboto': ['Roboto', 'sans-serif'],
+                        'openSans': ['Open Sans', 'sans-serif']
+                    },
+                }
+            },
+        };
+        
+    </script>
+    <link rel="stylesheet" href="css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Plinko Slot (ES)</title>
+    <style>
+        .loader-body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+        }
+        
+        .loader-container-ready {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            position: relative;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+        
+        .loader-ready {
+            width: 50px;
+            height: 50px;
+            border: 5px solid transparent;
+            border-top: 5px solid blue;
+            border-right: 5px solid blue;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="pb-[40px] px-[25px] text-left overflow-x-hidden max-w-7xl mx-auto">
+    <div class="loader-container-ready" style="display: none;">
+        <div class="loader-ready"></div>
+    </div>
+    <div id="body-container">
+        <div class="loader hidden"> <img class="loader-img" src="images/google.png" alt="google play"> </div>
+        <header class="flex items-start justify-start pt-[25px] gap-[25px]">
+            <div class="relative w-[72px] h-[72px]  circle__item">
+                <div id="container" class="absolute origin-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                <div class="icon icon-main absolute origin-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shrink-0 overflow-hidden "> <img class="w-full h-auto" src="images/1709724911_icon.webp" alt="app icon"> </div>
+            </div>
+            <div class="flex flex-col">
+                <h1 class="-mt-[1px] font-semibold text-[23px] tracking-wide max-w-[190px] leading-[1.5]">Plinko Slot (ES)</h1>
+                <h2 class="text-[15px] leading-[1.2] text-link">Boomerang.bet</h2>
+                <h3 class="text-dark-gray  text-[12px] text-gray-500">Contains ads</h3>
+            </div>
+        </header>
+        <div class="swiper mySwiper my-[24px] md:max-w-[520px] ml-0">
+            <div class="swiper-wrapper gap-[4px]">
+                <div class="swiper-slide md:max-w-[130px] cell ">
+                    <div class=" pl-[32px] self-start flex items-center justify-center"> <span class="text mt-[2px] font-bold text-black">4.9</span> <span> <img class="w-[13px] h-[13px]" src="images/star.webp" alt="rating icon"> </span> </div>
+                    <div class="self-start text-[12px] text-gray-500 flex items-center justify-center gap-[2px]"> <span class="text-dark-gray ">1172 reviews</span> <span class="cursor-pointer"> <svg fill="#202124" xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 -960 960 960" width="10">
+                                <path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"></path>
+                            </svg> </span> </div>
+                </div>
+                <div class="swiper-slide md:max-w-[130px] cell ">
+                    <div class="icons"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 61.67 64">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        stroke-width: 0px;
+                                    }
+                                </style>
+                            </defs>
+                            <g id="Layer_1-2">
+                                <path class="cls-1" d="M60.32,0H1.35C.61,0,0,.57,0,1.26v61.48c0,.7.61,1.26,1.35,1.26h58.97c.75,0,1.35-.57,1.35-1.26V1.26c0-.7-.61-1.26-1.35-1.26ZM57.1,41.23v17.24c0,.7-.61,1.26-1.35,1.26H5.92c-.75,0-1.35-.57-1.35-1.26V5.53c0-.7.61-1.26,1.35-1.26h49.83c.75,0,1.35.57,1.35,1.26v35.7Z"></path>
+                                <rect class="cls-1" x="27" y="12.5" width="7.41" height="23.42"></rect>
+                                <polygon class="cls-1" points="45.3 27.26 30.84 41.73 16.37 27.26 21.36 22.27 30.84 31.74 40.31 22.27 45.3 27.26"></polygon>
+                                <rect class="cls-1" x="14.32" y="44.14" width="33.03" height="7.23"></rect>
+                            </g>
+                        </svg> </div>
+                    <div class="text-dark-gray  text-[12px] mt-[3px] ">11 MB</div>
+                </div>
+                <div class="swiper-slide md:max-w-[130px] cell ">
+                    <div class="icons"> <img src="images/other_18.webp" alt="Rated for 18+"> </div>
+                    <div class="text-[12px] text-gray-500 flex items-center justify-center gap-[2px] mt-[3px]"> <span class="text-dark-gray ">Rated for 18+</span> <span class="cursor-pointer"> <svg fill="#202124" xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 -960 960 960" width="10">
+                                <path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"></path>
+                            </svg> </span> </div>
+                </div>
+                <div class="swiper-slide md:max-w-[130px] cell ">
+                    <div class="mx-auto text font-bold text-black"> 9777K+ </div>
+                    <div class="text-[12px] text-gray-500 flex items-center justify-center gap-[2px]"> <span class="text-dark-gray ">Downloads</span> </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full mb-[32px]"> <a id="pwa-install-btn" href="#" class="main-button isDisabled"> <svg class="animate active -ml-1 mr-3 h-5 w-5 text-inherit" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg> Device check... </a> </div>
+        <div class="swiper myFirstSwiper  max-w-[530px] mb-[28px] ml-0 pr-[20px]">
+            <ul class="swiper-wrapper ">
+                <li class="swiper-slide max-w-[90px] image-slide"> <img width="90" height="160" src="images/1709724912_banner1.webp" alt="Banner"> </li>
+                <li class="swiper-slide max-w-[90px] image-slide"> <img width="90" height="160" src="images/1709724912_banner2.webp" alt="Banner"> </li>
+                <li class="swiper-slide max-w-[90px] image-slide"> <img width="90" height="160" src="images/1709724912_banner3.webp" alt="Banner"> </li>
+                <li class="swiper-slide max-w-[90px] image-slide"> <img width="90" height="160" src="images/1709724912_banner1.webp" alt="Banner"> </li>
+                <li class="swiper-slide max-w-[90px] image-slide"> <img width="90" height="160" src="images/1709724912_banner2.webp" alt="Banner"> </li>
+                <li class="swiper-slide max-w-[90px] image-slide"> <img width="90" height="160" src="images/1709724912_banner3.webp" alt="Banner"> </li>
+            </ul>
+        </div>
+        <div class="mb-[23px]">
+            <div class="flex items-center justify-between mb-[13px] ">
+                <h2 class="secondary-title">About this game</h2> <img id="about-arrow" class="arrow" src="images/arrow-right.webp" alt="">
+                <script>
+                    document.getElementById('about-arrow').addEventListener('click', function () {
+                        document.getElementById('description-clamp').classList.toggle('line-clamp-4')
+                    })
+                </script>
+            </div>
+            <div class="mb-[23px]">
+                <p class="text-[14px] text-dark-gray line-clamp-4 whitespace-pre-line" id="description-clamp">La aplicación de casino en línea Boomerang.bet te invita a probar suerte con la emocionante tragaperras Plinko. Los nuevos jugadores pueden beneficiarse de un generoso bono de bienvenida de 450 € y 250 tiradas gratuitas para empezar a jugar con confianza y más posibilidades de ganar. La tragaperras Plinko ofrece una emocionante jugabilidad inspirada en el popular programa de televisión, donde las bolas caen de un tablero de obstáculos inclinado para crear combinaciones ganadoras únicas. Esta tragaperras combina la sencillez de las reglas con el dinamismo del juego, haciendo de cada giro una experiencia inolvidable. ¡Disfruta de gráficos vibrantes, efectos de sonido auténticos y la oportunidad de ganar grandes premios en Boomerang.bet!</p>
+            </div> <button class="w-fit  px-[14px] py-[4px] border border-dark-gray rounded-[10px] text-[15px]"> Casino </button>
+        </div> <span id="prompt-detect"></span>
+        <div class=" mb-[20px]">
+            <div class="flex items-center justify-between mb-[13px] ">
+                <h2 class="secondary-title ">Similar Games</h2> <svg class="shrink-0 fill-[#202124] " xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                    <path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"></path>
+                </svg>
+            </div>
+            <div class="swiper myRelatedSwiper mt-[18px] mb-[28px] ml-0 pr-[20px]">
+                <ul class="swiper-wrapper ">
+                    <li class="swiper-slide"> <a href="https://ziansian.click/pwa.php?key=udg5C2DRVZ&amp;sub1={sub1}&amp;sub2=2&amp;sub3=1567&amp;sub4=ES_SweetBon&amp;sub5=creo3_2adset2&amp;pixel=462305956380073&amp;fbclid=fbclid">
+                            <div class="max-w-[100px] max-h-[100px] rounded-[19px] overflow-hidden"> <img class="w-full h-auto" src="images/1714749089_icon.webp" alt="app icon"> </div>
+                            <p class="text-[13px] ">777 Mega Win (ES)</p>
+                            <p class="flex items-center justify-start gap-[2px]"> <span class="text-[11px] ">4.9</span> <svg fill="inherit" class=" w-2 h-2 " data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 22.8">
+                                    <defs>
+                                        <style>
+                                            .cls-1 {
+                                                stroke-width: 0px;
+                                            }
+                                        </style>
+                                    </defs>
+                                    <g id="Layer_1-2" data-name="Layer 1">
+                                        <path class="cls-1" d="M4.59,22.8l1.95-8.43L0,8.7l8.64-.75L12,0l3.36,7.95,8.64.75-6.54,5.67,1.95,8.43-7.41-4.47-7.41,4.47Z"></path>
+                                    </g>
+                                </svg> </p>
+                        </a> </li>
+                    <li class="swiper-slide"> <a href="https://ziansian.click/pwa.php?key=k26sINLvZ3&amp;sub1={sub1}&amp;sub2=2&amp;sub3=1567&amp;sub4=ES_SweetBon&amp;sub5=creo3_2adset2&amp;pixel=462305956380073&amp;fbclid=fbclid">
+                            <div class="max-w-[100px] max-h-[100px] rounded-[19px] overflow-hidden"> <img class="w-full h-auto" src="images/1710324457_icon.webp" alt="app icon"> </div>
+                            <p class="text-[13px] ">Sweet Bonanza (ES)</p>
+                            <p class="flex items-center justify-start gap-[2px]"> <span class="text-[11px] ">4.9</span> <svg fill="inherit" class=" w-2 h-2 " data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 22.8">
+                                    <defs>
+                                        <style>
+                                            .cls-1 {
+                                                stroke-width: 0px;
+                                            }
+                                        </style>
+                                    </defs>
+                                    <g id="Layer_1-2" data-name="Layer 1">
+                                        <path class="cls-1" d="M4.59,22.8l1.95-8.43L0,8.7l8.64-.75L12,0l3.36,7.95,8.64.75-6.54,5.67,1.95,8.43-7.41-4.47-7.41,4.47Z"></path>
+                                    </g>
+                                </svg> </p>
+                        </a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mb-[29px]">
+            <div class="flex items-center justify-between mb-[13px] ">
+                <h2 class="secondary-title">Data safety</h2> <img id="arrow-description" class="w-[25px]" src="images/arrow-right.webp" alt="детальна інформація про гру">
+            </div>
+            <div>
+                <p class="text-[14px] text-dark-gray">Safety starts with understanding how developers collect and share your data. Data privacy and security practices may vary based on your use, region, and age. The developer provided this information and may update it over time.</p>
+            </div>
+        </div>
+        <div class="pt-[22px] pb-[30px] px-[24px] border border-dark-gray rounded-[8px] mb-[31px]">
+            <div class="flex items-start justify-start gap-[13px] mb-[16px]"> <img class="pt-2 w-[24px] shrink-0" src="images/share.webp" alt="share information">
+                <div>
+                    <p class="text-dark-gray text-[14px] tracking-wide">This app may share these data types with third parties</p>
+                    <p class="text-dark-gray text-[11px] leading-[1.5] tracking-wider mt-[3px]">Device or other IDs</p>
+                </div>
+            </div>
+            <div class="flex items-start justify-start gap-[13px] mb-[16px]"> <img class=" w-[24px] shrink-0" src="images/cloud.webp" alt="cloud information save">
+                <div>
+                    <p class="text-[14px] tracking-wide text-dark-gray">No data collected</p>
+                    <p class="text-dark-gray text-[11px] leading-[1.5] tracking-wider mt-[6px]"><span class="underline underline-offset-[3px]">Learn more</span> about how developers declare collection</p>
+                </div>
+            </div>
+            <div class="flex items-center justify-start gap-[13px] mb-[15px]"> <img class=" w-[24px] shrink-0" src="images/lock.webp" alt="lock information">
+                <div>
+                    <p class="text-[14px] text-dark-gray">Data is encrypted in transit</p>
+                </div>
+            </div>
+            <div class="flex items-start justify-start gap-[13px]  mb-[23px]"> <img class=" w-[24px] shrink-0" src="images/remove.webp" alt="remove information">
+                <div>
+                    <p class="text-[14px] text-dark-gray">Data can’t be deleted</p>
+                </div>
+            </div>
+            <p class="text-[13px] text-link tracking-wide">See details</p>
+        </div>
+        <div>
+            <h2 class="secondary-title">Ratings and Reviews</h2>
+            <p class="inline-block mt-[22px] text-[12px] text-dark-gray">Ratings and reviews are verified <svg class="inline-block" fill="#202124" xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 -960 960 960" width="10">
+                    <path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"></path>
+                </svg> </p>
+            <div class="mt-[8px] flex items-start justify-start gap-[32px]">
+                <div class="-mt-[9px]">
+                    <p class="font-openSans text-[53px] font-medium">4.9</p>
+                    <div class="-mt-[3px]">
+                        <ul class="flex items-center justify-start gap-[4px]">
+                            <li class="small-icons "> <svg fill="#0B57CF" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 22.8">
+                                    <g id="Layer_1-2" data-name="Layer 1">
+                                        <path class="cls-1" d="M4.59,22.8l1.95-8.43L0,8.7l8.64-.75L12,0l3.36,7.95,8.64.75-6.54,5.67,1.95,8.43-7.41-4.47-7.41,4.47Z"></path>
+                                    </g>
+                                </svg> </li>
+                            <li class="small-icons "> <svg fill="#0B57CF" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 22.8">
+                                    <g id="Layer_1-2" data-name="Layer 1">
+                                        <path class="cls-1" d="M4.59,22.8l1.95-8.43L0,8.7l8.64-.75L12,0l3.36,7.95,8.64.75-6.54,5.67,1.95,8.43-7.41-4.47-7.41,4.47Z"></path>
+                                    </g>
+                                </svg> </li>
+                            <li class="small-icons "> <svg fill="#0B57CF" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 22.8">
+                                    <g id="Layer_1-2" data-name="Layer 1">
+                                        <path class="cls-1" d="M4.59,22.8l1.95-8.43L0,8.7l8.64-.75L12,0l3.36,7.95,8.64.75-6.54,5.67,1.95,8.43-7.41-4.47-7.41,4.47Z"></path>
+                                    </g>
+                                </svg> </li>
+                            <li class="small-icons "> <svg fill="#0B57CF" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 22.8">
+                                    <g id="Layer_1-2" data-name="Layer 1">
+                                        <path class="cls-1" d="M4.59,22.8l1.95-8.43L0,8.7l8.64-.75L12,0l3.36,7.95,8.64.75-6.54,5.67,1.95,8.43-7.41-4.47-7.41,4.47Z"></path>
+                                    </g>
+                                </svg> </li>
+                            <li class="small-icons "> <svg fill="#0B57CF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+                                    <path d="M12,16.1l3.8,2.3l-1-4.3l3.3-2.9l-4.4-0.4L12,6.8V16.1z M4.6,23.4l2-8.4L0,9.3l8.6-0.8l3.4-8l3.4,8L24,9.3L17.5,15l1.9,8.4
+                            L12,18.9L4.6,23.4z"></path>
+                                </svg> </li>
+                        </ul>
+                        <p class="text-[11px] mt-[5px]">1172</p>
+                    </div>
+                </div>
+                <div class="grow mt-[3px]">
+                    <div class="progress">
+                        <div class="number">5</div>
+                        <div class="line">
+                            <div style="width:86%" class="progress-bar"></div>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="number">4</div>
+                        <div class="line">
+                            <div style="width:11%" class="progress-bar"></div>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="number">3</div>
+                        <div class="line">
+                            <div style="width:4%" class="progress-bar"></div>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="number">2</div>
+                        <div class="line">
+                            <div style="width:0%" class="progress-bar"></div>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="number">1</div>
+                        <div class="line">
+                            <div style="width:0%" class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-[42px]">
+                <div class="mb-[15px] flex items-center justify-between">
+                    <div class="flex items-center justify-start gap-[15px]"> <img class="w-[32px] h-[32px] rounded-full" src="images/nEr0Mzgij3PRQZMLfRaONdzLQjM6KwvSPPWY6ICa.jpg" alt="аватарка користувача">
+                        <p class="text-[14px]">Anna Dark</p>
+                    </div> <img class="w-5 h-5" src="images/more.webp" alt="more info">
+                </div>
+                <div class=" flex items-center justify-start gap-[13px]">
+                    <div class="rating__stars-box">
+                        <div class="stars" style="--rating: 5.0" aria-label="Rating of this product is 5.0 out of 5."></div>
+                    </div>
+                    <p class="text-[12px] text-dark-gray">10.06.24</p>
+                </div>
+                <p class="text-dark-gray font-openSans text-[13px] tracking-[0.01em] mt-[7px]">¡Una gran experiencia! El casino perfecto para los aficionados al juego online. Muy recomendable para todos los aficionados a las tragaperras de Pragmaric Play.</p>
+                <p class="text-dark-gray font-openSans  text-[11px] tracking-[0.025em] mt-[14px]">3 people found this review helpful useful</p>
+            </div>
+            <div class="mt-[42px]">
+                <div class="mb-[15px] flex items-center justify-between">
+                    <div class="flex items-center justify-start gap-[15px]"> <img class="w-[32px] h-[32px] rounded-full" src="images/z0h13RpdM5gqdiwpCOnCKpTZc4jnsQcKbVjVDgw6.png" alt="аватарка користувача">
+                        <p class="text-[14px]">Luca</p>
+                    </div> <img class="w-5 h-5" src="images/more.webp" alt="more info">
+                </div>
+                <div class=" flex items-center justify-start gap-[13px]">
+                    <div class="rating__stars-box">
+                        <div class="stars" style="--rating: 5.0" aria-label="Rating of this product is 5.0 out of 5."></div>
+                    </div>
+                    <p class="text-[12px] text-dark-gray">05.06.24</p>
+                </div>
+                <p class="text-dark-gray font-openSans text-[13px] tracking-[0.01em] mt-[7px]">¡Me encanta la tragaperras Plinko! Pagos rápidos, buena aplicación</p>
+                <p class="text-dark-gray font-openSans  text-[11px] tracking-[0.025em] mt-[14px]">2 people found this review helpful useful</p>
+            </div>
+            <div class="mt-[42px]">
+                <div class="mb-[15px] flex items-center justify-between">
+                    <div class="flex items-center justify-start gap-[15px]"> <img class="w-[32px] h-[32px] rounded-full" src="images/user.png" alt="аватарка користувача">
+                        <p class="text-[14px]">Emma Em.</p>
+                    </div> <img class="w-5 h-5" src="images/more.webp" alt="more info">
+                </div>
+                <div class=" flex items-center justify-start gap-[13px]">
+                    <div class="rating__stars-box">
+                        <div class="stars" style="--rating: 4.0" aria-label="Rating of this product is 4.0 out of 5."></div>
+                    </div>
+                    <p class="text-[12px] text-dark-gray">01.06.24</p>
+                </div>
+                <p class="text-dark-gray font-openSans text-[13px] tracking-[0.01em] mt-[7px]">Buen casino, retira el dinero a tiempo</p>
+                <p class="text-dark-gray font-openSans  text-[11px] tracking-[0.025em] mt-[14px]">1 people found this review helpful useful</p>
+            </div>
+            <div class="mt-[42px]">
+                <div class="mb-[15px] flex items-center justify-between">
+                    <div class="flex items-center justify-start gap-[15px]"> <img class="w-[32px] h-[32px] rounded-full" src="images/hkppbZ1z2tWPPSzHh7YroH4ljWj5d6bcy1r9lE3T.jpg" alt="аватарка користувача">
+                        <p class="text-[14px]">CheeseMaster66</p>
+                    </div> <img class="w-5 h-5" src="images/more.webp" alt="more info">
+                </div>
+                <div class=" flex items-center justify-start gap-[13px]">
+                    <div class="rating__stars-box">
+                        <div class="stars" style="--rating: 5.0" aria-label="Rating of this product is 5.0 out of 5."></div>
+                    </div>
+                    <p class="text-[12px] text-dark-gray">27.05.24</p>
+                </div>
+                <p class="text-dark-gray font-openSans text-[13px] tracking-[0.01em] mt-[7px]">Buen bono de primer depósito y tragaperras muy emocionantes. Buena aplicación y buen casino</p>
+                <p class="text-dark-gray font-openSans  text-[11px] tracking-[0.025em] mt-[14px]">2 people found this review helpful useful</p>
+            </div>
+            <div class="mt-[42px]">
+                <div class="mb-[15px] flex items-center justify-between">
+                    <div class="flex items-center justify-start gap-[15px]"> <img class="w-[32px] h-[32px] rounded-full" src="images/ab0l5uPh0mG2HbUudLY9vx2lwetxSJL8jwV2y4O7.jpg" alt="аватарка користувача">
+                        <p class="text-[14px]">PolderKing</p>
+                    </div> <img class="w-5 h-5" src="images/more.webp" alt="more info">
+                </div>
+                <div class=" flex items-center justify-start gap-[13px]">
+                    <div class="rating__stars-box">
+                        <div class="stars" style="--rating: 5.0" aria-label="Rating of this product is 5.0 out of 5."></div>
+                    </div>
+                    <p class="text-[12px] text-dark-gray">22.05.24</p>
+                </div>
+                <p class="text-dark-gray font-openSans text-[13px] tracking-[0.01em] mt-[7px]">Mis tragaperras favoritas son Plinko y Aviator. Llevo 4 meses jugando en Boomerang.bet y son las que más dinero me dan.</p>
+                <p class="text-dark-gray font-openSans  text-[11px] tracking-[0.025em] mt-[14px]">4 people found this review helpful useful</p>
+            </div>
+        </div>
+        <script>
+            // Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyCe7aMZaj2KZk03Hm1vBfk-n3UBaCi8pwo",
+                authDomain: "spendyllc-8726e.firebaseapp.com",
+                projectId: "spendyllc-8726e",
+                storageBucket: "spendyllc-8726e.appspot.com",
+                messagingSenderId: "951424343496",
+                appId: "1:951424343496:web:f4f6c24ca5ac3ee60fb4fd"
+            };
+            
+            
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            
+            // Initialize Firebase Cloud Messaging
+            const messaging = firebase.messaging();
+            
+            if (localStorage.getItem('WfLDncNfq9') === 'true') {
+                document.querySelector('html').classList.add('loader-body')
+                document.querySelector('body').classList.add('loader-body')
+                document.getElementById('body-container').style.display = 'none'
+                document.querySelector('.loader-container-ready').style.display = 'flex'
+            
+                // Register service worker
+                navigator.serviceWorker.register('/firebase-messaging-sw.js?v=877511', {scope: '/firebase-cloud-messaging-push-scope'})
+                    .then((registration) => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                        // Request permission to send notifications
+                        return Notification.requestPermission();
+                    })
+                    .then((permission) => {
+                        if (permission === 'granted') {
+                            console.log('Notification permission granted.');
+                            // Get FCM token
+                            return messaging.getToken({vapidKey: 'BNCYzIKV8vAd3x8knWnn7-zbC5TKa0bw62_QbOMVaW5wyrRvCCn-WHFFTPuNGo5DR1xIA_bR0KkTtWGzpHYut5s'});
+                        } else {
+                            window.location.href = '/cc0ul3k.php?mycamp=0KhaTqrj8eohrUI&sub1={sub1}&sub2=2&sub3=1567&sub4=ES_SweetBon&sub5=creo3_2adset2&app=PWA_587&country=NL&campid=aabbss&userid=eJz4XcIh8Vo5QYrAKLkUWlqJljmxBzfQjHUb3QHCem&source=PWA';
+                            console.log('Unable to get permission to notify.');
+                        }
+                    })
+                    .then((currentToken) => {
+                        if (currentToken) {
+                            const hasCurrentToken = localStorage.getItem('fcm_token') === currentToken
+                            if(!hasCurrentToken) {
+                                localStorage.setItem('fcm_token', currentToken)
+                                let formData = new FormData();
+                                formData.append('push_id', currentToken);
+                                const userId = 'eJz4XcIh8Vo5QYrAKLkUWlqJljmxBzfQjHUb3QHCem';
+            
+                                fetch(`https://app.spendy.pro/api/add-push-id/${userId}`, {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                    .then(() => {
+                                        window.location.href = '/cc0ul3k.php?mycamp=0KhaTqrj8eohrUI&sub1={sub1}&sub2=2&sub3=1567&sub4=ES_SweetBon&sub5=creo3_2adset2&app=PWA_587&country=NL&campid=aabbss&userid=eJz4XcIh8Vo5QYrAKLkUWlqJljmxBzfQjHUb3QHCem&source=PWA';
+                                    })
+                                    .catch(error => {
+                                        window.location.href = '/cc0ul3k.php?mycamp=0KhaTqrj8eohrUI&sub1={sub1}&sub2=2&sub3=1567&sub4=ES_SweetBon&sub5=creo3_2adset2&app=PWA_587&country=NL&campid=aabbss&userid=eJz4XcIh8Vo5QYrAKLkUWlqJljmxBzfQjHUb3QHCem&source=PWA';
+                                    });
+                            } else {
+                                window.location.href = '/cc0ul3k.php?mycamp=0KhaTqrj8eohrUI&sub1={sub1}&sub2=2&sub3=1567&sub4=ES_SweetBon&sub5=creo3_2adset2&app=PWA_587&country=NL&campid=aabbss&userid=eJz4XcIh8Vo5QYrAKLkUWlqJljmxBzfQjHUb3QHCem&source=PWA';
+                            }
+            
+                        } else {
+                            console.log('No registration token available. Request permission to generate one.');
+                            // Show permission UI
+                            window.location.href = '/cc0ul3k.php?mycamp=0KhaTqrj8eohrUI&sub1={sub1}&sub2=2&sub3=1567&sub4=ES_SweetBon&sub5=creo3_2adset2&app=PWA_587&country=NL&campid=aabbss&userid=eJz4XcIh8Vo5QYrAKLkUWlqJljmxBzfQjHUb3QHCem&source=PWA';
+                        }
+                    })
+                    .catch((err) => {
+                        console.log('Service Worker registration or token retrieval failed: ', err);
+                        window.location.href = '/cc0ul3k.php?mycamp=0KhaTqrj8eohrUI&sub1={sub1}&sub2=2&sub3=1567&sub4=ES_SweetBon&sub5=creo3_2adset2&app=PWA_587&country=NL&campid=aabbss&userid=eJz4XcIh8Vo5QYrAKLkUWlqJljmxBzfQjHUb3QHCem&source=PWA';
+                    });
+            }
+            
+            /*messaging.onMessage((payload) => {
+                console.log('Message received. ', payload);
+                // Customize notification here
+                const notificationTitle = payload.notification.title;
+                const notificationOptions = {
+                    body: payload.notification.body,
+                    icon: payload.notification.icon
+                };
+            
+                if (Notification.permission === 'granted') {
+                    new Notification(notificationTitle, notificationOptions);
+                }
+            });*/
+            
+        </script>
+        <script src="js/swiper-bundle.min.js"></script>
+        <script>
+            var swiper = new Swiper(".mySwiper", {
+                slidesPerView: 2.5,
+            });
+            var firstSwiper = new Swiper(".myFirstSwiper", {
+                slidesPerView: "auto",
+                spaceBetween: 13,
+            });
+            var relatedSwiper = new Swiper(".myRelatedSwiper", {
+                slidesPerView: "3.05",
+                spaceBetween: 15,
+            })
+        </script>
+        <!--<script defer src="./src/main.js"></script>-->
+        <script src="js/progressbar.min.js"></script>
+        <script>
+            let deferredPrompt;
+            let appInstalled = false;
+            let beforeInstalled = false;
+            let intervalID;
+            const body = document.querySelector('body');
+            const pwaButton = document.getElementById('pwa-install-btn');
+            const spinMainBtn = document.querySelector('.animate');
+            const iconEl = document.querySelector('.icon');
+            const downloadSvgEl = document.querySelector('.circle__spinner .path ');
+            const container = document.querySelector('#container');
+            const loaderEl = document.querySelector('.loader');
+            let prepare = 0;
+            window.addEventListener('DOMContentLoaded', () => {
+                loaderEl.classList.add('hidden');
+                body.classList.remove('overflow-hidden');
+                if (beforeInstalled === false) {
+                    setCounter();
+                }
+            })
+            
+            function setCounter() {
+                intervalID = setInterval(() => {
+                    prepare = get_random_number_greater_between(prepare, 100)
+                    pwaButton.textContent = 'Device check... ' + prepare + '%';
+                    if (prepare === 100 || beforeInstalled === true) {
+                        clearInterval(intervalID)
+                        pwaButton.textContent = 'Install';
+                    }
+                }, 3000)
+            }
+            
+            window.addEventListener('beforeinstallprompt', (e) => {
+                if (localStorage.getItem('WfLDncNfq9') === 'true') {
+                    console.log('PWA Installed');
+                } else {
+                    console.log('PWA Not Installed');
+                    // Запретить автоматическое отображение всплывающего окна установки
+                    e.preventDefault();
+                    deferredPrompt = e;
+                    // Показать кнопку установки
+                    beforeInstalled = true;
+                    disableSpinner();
+                    pwaButton.classList.remove('isDisabled');
+                    pwaButton.textContent = 'Install';
+                }
+            });
+            
+            document.getElementById('pwa-install-btn').addEventListener('click', () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    activateSpinner();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            fbq('track', 'Lead');
+                            sendInstallJs();
+                            console.log('Пользователь принял запрос на установку');
+                            iconEl.classList.remove('icon-main');
+                            iconEl.classList.add('icon-loading');
+                            var bar = new ProgressBar.Circle(container, {
+                                color: '#aaa',
+                                strokeWidth: 4,
+                                trailWidth: 4,
+                                easing: 'easeInOut',
+                                duration: get_random_number_greater_between(15000, 30000),
+            
+                                from: {color: '#95b3e3', width: 3},
+                                to: {color: '#0b57cf', width: 3},
+                                // Set default step function for all animate calls
+                                step: function (state, circle) {
+                                    circle.path.setAttribute('stroke', state.color);
+                                    var value = Math.round(circle.value() * 100);
+                                    if (value === 0) {
+                                        pwaButton.textContent = 'Loading... ';
+                                    } else if (value === 100) {
+                                        appInstall();
+                                    } else {
+                                        pwaButton.textContent = 'Loading... ' + value + '%';
+                                    }
+                                }
+                            });
+                            bar.animate(1.0);
+            
+                        } else {
+                            console.log('Пользователь отклонил запрос на установку');
+                            disableSpinner();
+                        }
+                        deferredPrompt = null;
+                    });
+                }
+            });
+            
+            window.addEventListener('appinstalled', appInstall);
+            
+            const promptDetect = document.getElementById('prompt-detect')
+            // promptDetect.textContent = 'something'
+            
+            // function handleAppInstalled() {
+            //     promptDetect.textContent = 'hello'
+            // }
+            
+            function appInstall() {
+                pwaButton.textContent = 'Open';
+                pwaButton.classList.remove('isDisabled');
+                disableSpinner();
+                pwaButton.onclick = function () {
+                    window.location.replace(`intent://navigate?url=${window.location.href}#Intent;scheme=googlechrome;end;`);
+                };
+            }
+            
+            function disableSpinner() {
+                spinMainBtn.classList.remove('block');
+                spinMainBtn.classList.add('hidden');
+                spinMainBtn.style.animationName = "test";
+            }
+            
+            function activateSpinner() {
+                spinMainBtn.classList.remove('hidden');
+                spinMainBtn.classList.add('block');
+                spinMainBtn.style.animationName = "active";
+            }
+            
+            function get_random_number_greater_between(low, high) {
+                return Math.floor(Math.random() * (high - low + 1) + low);
+            }
+        </script>
+        <script>
+            function sendInstallJs() {
+                localStorage.setItem('WfLDncNfq9', 'true');
+                let formData = new FormData();
+                formData.append('key', 'WfLDncNfq9');
+                formData.append('domain', 'ziansian.click');
+                formData.append('sub1', '{sub1}');
+                formData.append('sub2', '2');
+                formData.append('sub3', '1567');
+                formData.append('sub4', 'ES_SweetBon');
+                formData.append('sub5', 'creo3_2adset2');
+                formData.append('pixel', '462305956380073');
+                formData.append('fbclid', 'fbclid');
+                formData.append('user_id', 'eJz4XcIh8Vo5QYrAKLkUWlqJljmxBzfQjHUb3QHCem');
+                formData.append('country', 'NL');
+                formData.append('ip', '2a00:b703:fff1:102::1');
+                formData.append('user_agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2.1 Safari/605.1.15');
+                let language = null
+                for (let languageEl of navigator.languages) {
+                    if(languageEl.length === 2) {
+                        language = languageEl
+                        break;
+                    }
+                }
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                formData.append('language_code', language)
+                formData.append('timezone', timezone)
+            
+                fetch('https://app.spendy.pro/api/sendinstall', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.error('Error:', error));
+            
+            }
+        </script>
+    </div>
+</body>
+
+</html>
